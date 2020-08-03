@@ -1,4 +1,4 @@
-require('dotenv').config({path: __dirname + '/.env'})   //For process.env
+require('dotenv').config({path: __dirname + '/.env'})   //For process.env variables
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -16,7 +16,7 @@ app.get('/ping', function (req, res) {
         2: "two",
         3: "three"
     }
-    return res.send(obj);
+    res.send(obj)
 });
 
 app.get('/', function (req, res) {
