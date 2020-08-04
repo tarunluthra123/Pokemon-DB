@@ -30,11 +30,18 @@ class NavBar extends Component {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link className="btn btn-lg" onClick={() => this.routeToLink('/me')}>Hello Pokemon
-                            Master</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Log out
+                        <Nav.Link className="btn btn-lg" onClick={() => this.routeToLink('/me')}>
+                            Hello Pokemon Master
                         </Nav.Link>
+                        {this.props.currentUser === '' &&
+                        (<Nav.Link onClick={() => this.routeToLink('login')}>
+                            Log In
+                        </Nav.Link>)}
+                        {this.props.currentUser !== '' &&
+                        (<Nav.Link onClick={() => this.routeToLink('logout')}>
+                            Log Out
+                        </Nav.Link>)}
+
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

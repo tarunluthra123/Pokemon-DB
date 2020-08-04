@@ -9,13 +9,15 @@ function generateAccessToken(username) {
 }
 
 route.get('/', (req, res) => {
-    const decoded = jwt.verify(req.body.token, process.env.TOKEN_SECRET);
+    console.log(req.query.token)
+    const decoded = jwt.verify(req.query.token, process.env.TOKEN_SECRET);
     console.log(decoded)
     res.json(decoded.username)
 })
 
 route.post('/', async (req, res) => {
     const query = req.body
+    console.log("query = ", query)
     try {
         const db = await MongoClient.connect(MONGO_URL + DB_NAME)
         const users = db.collection('users')
