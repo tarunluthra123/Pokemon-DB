@@ -31,14 +31,14 @@ class NavBar extends Component {
                     </Nav>
                     <Nav>
                         <Nav.Link className="btn btn-lg" onClick={() => this.routeToLink('/me')}>
-                            Hello Pokemon Master
+                            Hello {this.props.currentUser}
                         </Nav.Link>
                         {this.props.currentUser === '' &&
                         (<Nav.Link onClick={() => this.routeToLink('login')}>
                             Log In
                         </Nav.Link>)}
                         {this.props.currentUser !== '' &&
-                        (<Nav.Link onClick={() => this.routeToLink('logout')}>
+                        (<Nav.Link onClick={this.props.logoutUser}>
                             Log Out
                         </Nav.Link>)}
 

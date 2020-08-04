@@ -6,6 +6,7 @@ import HomePage from "./Components/HomePage";
 import UserPage from "./Components/UserPage";
 import LoginPage from "./Components/LoginPage";
 import cookie from 'react-cookies'
+import SignUpPage from "./Components/SignUpPage";
 
 class App extends React.Component {
     constructor(props) {
@@ -69,12 +70,28 @@ class App extends React.Component {
         }
     }
 
+    logoutUser = () => {
+        this.setState({
+            currentUser: '',
+            userToken: ''
+        })
+        cookie.remove('token')
+    }
+
+    signUpAndSetUsernameToken = (username,token)=>{
+        cookie.save('token', token, {path: '/'})
+        this.setState({
+            currentUser: username,
+            userToken: token
+        })
+    }
+
     render() {
         return (
             <Router>
                 <div>
                     <div>
-                        <NavBar currentUser={this.state.currentUser}/>
+                        <NavBar currentUser={this.state.currentUser} logoutUser={this.logoutUser}/>
                     </div>
                     <div>
                         <Route exact path='/' component={HomePage}>
@@ -85,6 +102,9 @@ class App extends React.Component {
                         </Route>
                         <Route exact path='/login' component={LoginPage}>
                             <LoginPage loginUserAPI={this.loginUserAPI}/>
+                        </Route>
+                        <Route exact path='/signup' component={SignUpPage}>
+                            <SignUpPage signUpAndSetUsernameToken={this.signUpAndSetUsernameToken}/>
                         </Route>
                     </div>
                 </div>
